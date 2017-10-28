@@ -1,0 +1,12 @@
+div.Login{
+  height: auto;
+  margin: auto;
+  width: 50%;
+  border: 1px solid DodgerBlue;
+  padding: 30px;
+  text-align: center;
+}
+
+div.server_available{
+  text-align: center;
+}
