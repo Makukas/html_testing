@@ -1,4 +1,5 @@
 <?php
+session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -71,9 +72,14 @@ if ($conn->connect_error) {
       $InputPassword = htmlspecialchars($_POST['InputPassword']);
       $sql = "SELECT * FROM `login` WHERE email = '$InputEmail'";
       $result = mysqli_query($conn,$sql);
-      $retrieved_hash = mysqli_fetch_assoc($result);
-      if (password_verify($InputPassword, $retrieved_hash['password_hash'])) {
-        header('Location: index.php');
+      $retrieved = mysqli_fetch_assoc($result);
+      if (password_verify($InputPassword, $retrieved['password_hash'])) {
+
+        $_SESSION["email"] = $InputEmail;
+        $_SESSION["id"] = $retrieved['id'];
+
+        header('Location: login_success.php');
+
       }
       else{
         ?>

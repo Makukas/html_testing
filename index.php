@@ -1,3 +1,8 @@
+<?php
+
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +17,8 @@
       <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+
+
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#"></a>

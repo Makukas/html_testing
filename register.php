@@ -1,4 +1,5 @@
 <?php
+session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -52,6 +53,10 @@ if ($conn->connect_error) {
 
 <br><br>
 
+<?php
+if(empty($_SESSION['email'])){
+ ?>
+
 <div class="Login">
   <h3>Registration</h3><br>
 <form method="post">
@@ -80,6 +85,17 @@ if ($conn->connect_error) {
   <button type="submit" class="btn btn-outline-primary" name="registration">Submit</button>
 </form>
 <br>
+
+<?php
+}
+else{
+?>
+<div class="alert alert-danger" role="alert">
+You already have an account!
+</div>
+<?php
+}
+ ?>
 
 <?php
 $pssw_wrong = false;
