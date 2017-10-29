@@ -74,12 +74,10 @@ if ($conn->connect_error) {
       $result = mysqli_query($conn,$sql);
       $retrieved = mysqli_fetch_assoc($result);
       if (password_verify($InputPassword, $retrieved['password_hash'])) {
-
-        $_SESSION["email"] = $InputEmail;
-        $_SESSION["id"] = $retrieved['id'];
-
+        $_SESSION['id'] = session_id();
+        $sql = "UPDATE login SET session_id = '{$_SESSION['id']}' WHERE email = '$InputEmail'";
+        $result = mysqli_query($conn,$sql);
         header('Location: login_success.php');
-
       }
       else{
         ?>
