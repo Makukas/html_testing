@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 <html>
 <head>
     <title>
-      Home
+      Database
     </title>
 
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -32,38 +32,14 @@ if ($conn->connect_error) {
 </head>
 <body>
 
-
-<?php
-  $_SESSION['id'] = session_id();
-  $sql = "SELECT * FROM login WHERE session_id = '{$_SESSION['id']}'";
-  $result = mysqli_query($conn,$sql);
-  $retrieved = mysqli_fetch_assoc($result);
-  if(mysqli_num_rows($result) == 0){
-?>
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="login.php">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="register.php">Register</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<?php
-}
-else{
+  <?php
+    $_SESSION['id'] = session_id();
+    $sql = "SELECT * FROM login WHERE session_id = '{$_SESSION['id']}'";
+    $result = mysqli_query($conn,$sql);
+    $retrieved = mysqli_fetch_assoc($result);
+    if(mysqli_num_rows($result) == 0){
+      header('Location: index.php');}
+      else{}
   ?>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -73,11 +49,11 @@ else{
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
-      </li>
       <li class="nav-item">
-        <a class="nav-link" href="database.php">Database</a>
+        <a class="nav-link" href="index.php">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="database.php">Database<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">User settings</a>
@@ -89,12 +65,23 @@ else{
   </div>
 </nav>
 
-<?php
-}
+  <form>
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
+      <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+        <option selected>Choose...</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+  </form>
+
+  <div id="table">
 
 
-
- ?>
+  </div>
 
 </body>
 </html>

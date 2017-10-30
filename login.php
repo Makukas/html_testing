@@ -77,7 +77,7 @@ if ($conn->connect_error) {
         $_SESSION['id'] = session_id();
         $sql = "UPDATE login SET session_id = '{$_SESSION['id']}' WHERE email = '$InputEmail'";
         $result = mysqli_query($conn,$sql);
-        header('Location: login_success.php');
+        header('Location: index.php');
       }
       else{
         ?>
