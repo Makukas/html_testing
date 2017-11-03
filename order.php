@@ -39,7 +39,6 @@ if ($conn->connect_error) {
     $retrieved = mysqli_fetch_assoc($result);
     if(mysqli_num_rows($result) == 0){
       header('Location: index.php');}
-      else{}
   ?>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -52,11 +51,11 @@ if ($conn->connect_error) {
       <li class="nav-item">
         <a class="nav-link" href="index.php">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="order.php">Order</a>
-      </li>
       <li class="nav-item active">
-        <a class="nav-link" href="database.php">Database<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="order.php">Order<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="database.php">Database</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="settings.php">User settings</a>
@@ -68,23 +67,10 @@ if ($conn->connect_error) {
   </div>
 </nav>
 
-  <form>
-  <div class="form-row align-items-center">
-    <div class="col-auto">
-      <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
-      <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-        <option selected>Choose...</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </form>
+<div>
 
-  <div id="table">
+</div>
 
-
-  </div>
 
 </body>
 </html>

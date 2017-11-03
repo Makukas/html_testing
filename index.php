@@ -77,10 +77,13 @@ else{
         <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="order.php">Order</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="database.php">Database</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">User settings</a>
+        <a class="nav-link" href="settings.php">User settings</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="logout.php">Log out</a>
