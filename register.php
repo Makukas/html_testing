@@ -116,6 +116,20 @@ $RegLastName = $_POST[htmlspecialchars('RegLastName')];
 $sql = "INSERT INTO login (FirstName, LastName, email, password_hash, User_role) VALUES('$RegFirstName', '$RegLastName', '$RegEmail', '$RegPassword1', 'User')";
 $result = mysqli_query($conn, $sql);
 
+$sql = "SELECT * FROM login WHERE email = '$RegEmail'";
+$result = mysqli_query($conn,$sql);
+$retrieved =mysqli_fetch_assoc($result);
+
+$sql = "CREATE TABLE orders_{$retrieved['id']} (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+amount INT(5) UNSIGNED NOT NULL,
+price DOUBLE UNSIGNED NOT NULL,
+delivery_address VARCHAR(32) NOT NULL,
+purchase_date DATE NOT NULL
+)";
+
+$result = mysqli_query($conn,$sql);
+
 }
 else if(mysqli_num_rows($result) >= 1){
   ?>
