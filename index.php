@@ -1,20 +1,5 @@
 <?php
-
-session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "html_training";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-$con = true;
-
-// Check connection
-if ($conn->connect_error) {
-
-   $con = false;
-}
+require("functions.php");
 ?>
 
 <!DOCTYPE html>
@@ -34,11 +19,7 @@ if ($conn->connect_error) {
 
 
 <?php
-  $_SESSION['id'] = session_id();
-  $sql = "SELECT * FROM login WHERE session_id = '{$_SESSION['id']}'";
-  $result = mysqli_query($conn,$sql);
-  $retrieved = mysqli_fetch_assoc($result);
-  if(mysqli_num_rows($result) == 0){
+  if($session_control->check_session() == false){
 ?>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -63,7 +44,7 @@ if ($conn->connect_error) {
 
 <?php
 }
-else{
+else if($session_control->check_session() == true){
   ?>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -94,9 +75,6 @@ else{
 
 <?php
 }
-
-
-
  ?>
 
 </body>

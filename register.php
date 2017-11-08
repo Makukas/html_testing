@@ -1,19 +1,5 @@
 <?php
-session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "html_training";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-$con = true;
-
-// Check connection
-if ($conn->connect_error) {
-
-   $con = false;
-}
+require("functions.php");
 ?>
 <!DOCTYPE html>
 

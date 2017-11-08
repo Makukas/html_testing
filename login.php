@@ -1,19 +1,5 @@
 <?php
-session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "html_training";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-$con = true;
-
-// Check connection
-if ($conn->connect_error) {
-
-   $con = false;
-}
+require("functions.php");
 ?>
 <!DOCTYPE html>
 
@@ -67,28 +53,17 @@ if ($conn->connect_error) {
     <button type="submit" name="login" class="btn btn-outline-primary">Submit</button>
   </form>
 
-  <?php if (isset($_POST['login'])){
-      $InputEmail = htmlspecialchars($_POST['InputEmail']);
-      $InputPassword = htmlspecialchars($_POST['InputPassword']);
-      $sql = "SELECT * FROM `login` WHERE email = '$InputEmail'";
-      $result = mysqli_query($conn,$sql);
-      $retrieved = mysqli_fetch_assoc($result);
-      if (password_verify($InputPassword, $retrieved['password_hash'])) {
-        $_SESSION['id'] = session_id();
-        $sql = "UPDATE login SET session_id = '{$_SESSION['id']}' WHERE email = '$InputEmail'";
-        $result = mysqli_query($conn,$sql);
-        header('Location: index.php');
-      }
-      else{
-        ?>
-        <br>
-        <div class="alert alert-danger" role="alert">
-        Wrong Email and/or password!
+  <?php
+  if (isset($_POST['login'])){
+  if($session_control->login() == true){}
+    else if($session_control->login() == false){
+      ?>
+      <br>
+      <div class="alert alert-danger" role="alert">
+          Wrong email and/or password!
       </div>
       <?php
-      }
-
-    } ?>
+    }} ?>
 
 </div>
 </body>

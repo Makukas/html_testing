@@ -1,20 +1,6 @@
 <?php
-
-session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "html_training";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-$con = true;
-
-// Check connection
-if ($conn->connect_error) {
-
-   $con = false;
-}
+require("functions.php");
+$session_control->retrieve();
 ?>
 
 <!DOCTYPE html>
@@ -58,27 +44,20 @@ if ($conn->connect_error) {
   </div>
 </nav>
 
-  <?php
-  $_SESSION['id'] = session_id();
-  $sql = "SELECT * FROM login WHERE session_id = '{$_SESSION['id']}'";
-  $result = mysqli_query($conn,$sql);
-  $retrieved = mysqli_fetch_assoc($result);
-  echo $_SESSION['id'];
-  ?>
 
   <div class="Login">
   <form method='post'>
   <div class="form-group">
     <label class="col-form-label" for="formGroupExampleInput">First name</label>
-    <input type="text" class="form-control" id="formGroupFirstName" name="formGroupFirstName" value=<?php echo $retrieved['FirstName'];?> placeholder= "First Name">
+    <input type="text" class="form-control" id="formGroupFirstName" name="formGroupFirstName" value=<?php echo $_SESSION['FirstName'];?> placeholder= "First Name">
   </div>
   <div class="form-group">
     <label class="col-form-label" for="formGroupExampleInput2">Last name</label>
-    <input type="text" class="form-control" id="formGroupLastName" name="formGroupLastName" value=<?php echo $retrieved['LastName'];?> placeholder= "Last Name">
+    <input type="text" class="form-control" id="formGroupLastName" name="formGroupLastName" value=<?php echo $_SESSION['LastName'];?> placeholder= "Last Name">
   </div>
   <div class="form-group">
     <label class="col-form-label" for="formGroupExampleInput2">Email</label>
-    <input type="text" class="form-control" id="formGroupEmail" name="formGroupEmail" value=<?php echo $retrieved['email'];?> placeholder=<?php echo $retrieved['email']; ?> placeholder= "Email">
+    <input type="text" class="form-control" id="formGroupEmail" name="formGroupEmail" value=<?php echo $_SESSION['email'];?> placeholder= "Email">
   </div>
   <div class="form-group">
     <label class="col-form-label" for="formGroupExampleInput2">Password</label>
@@ -95,23 +74,7 @@ if ($conn->connect_error) {
 
 <?php
 if(isset($_POST['settings'])){
-  echo $_SESSION['id'];
-  $FirstName = htmlspecialchars($_POST['formGroupFirstName']);
-  $LastName = htmlspecialchars($_POST['formGroupLastName']);
-  $Email = htmlspecialchars($_POST['formGroupEmail']);
-  $Password = htmlspecialchars($_POST['formGroupPassword']);
-  $RepeatPassword = htmlspecialchars($_POST['formGroupRepeatPassword']);
-
-  $sql = "UPDATE login SET FirstName = '$FirstName', LastName = '$LastName', email = '$Email' WHERE session_id = '{$_SESSION['id']}'";
-  $result = mysqli_query($conn,$sql);
-
-  if(!empty($Password) && $Password == $RepeatPassword){
-
-  $Password = password_hash($Password, PASSWORD_DEFAULT);
-  $sql = "UPDATE login SET password_hash = '$Password' WHERE session_id = '{$_SESSION['id']}'";
-  $result = mysqli_query($conn,$sql);
-}
-  header('Location: index.php');
+  if($session_control->settings() == true){header('Location: index.php');}
 }
  ?>
 
